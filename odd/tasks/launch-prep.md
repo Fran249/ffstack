@@ -67,6 +67,7 @@ The deploy origin is `https://ffstack.vercel.app` (Vercel-generated domain).
 | T4 | S4 | inline | ✅ done | Layout OG/theme-color/Twitter; `og.png`+`og-en.png` (1200×630) + `robots.txt`; `.gitignore` |
 | T5 | all | inline | ✅ done | build 16 pages green; 26 HTML assertions pass |
 | T6 | S5 | inline | ✅ done | `site` + sitemap + canonical/absolute OG + `vercel.json`; 13 assertions + preview smoke (13 routes 200) |
+| T7 | S6 | inline | ✅ done | repo init `main` + real README + commit `e8d7194` pushed to `origin`; remote == local |
 
 Route note: all inline — focused edits across a handful of files, no Writer trigger reason.
 
@@ -100,3 +101,9 @@ Route note: all inline — focused edits across a handful of files, no Writer tr
 **Evidence (T6)**: build green (16 pages) + `sitemap-index.xml created`. 13 assertions pass: sitemap has 16 `<loc>` + hreflang alternates; index points to `sitemap-0.xml`; canonical/og:url/og:image absolute and locale-correct on `/`, `/en/`, project pages; robots has the sitemap line; internal `/hire-me/` links keep the slash. Preview smoke (`astro preview` :4331): 13 routes 200 with correct content-types; served canonical/title/og:image verified on `/`, `/hire-me/`, `/en/`. Note: `/hire-me` (no slash) 404s in `astro preview`; `vercel.json` `trailingSlash: true` makes Vercel redirect to the canonical slash form.
 
 **Next**: user review; then upload (connect the repo to Vercel — build `npm run build`, output `dist/`).
+
+**L9** (2026-10-11, user): "ya inicie el repo en github, solo hay que subir todo : https://github.com/Fran249/personal-portfolio.git" → local `git init -b main` (repo was not initialized locally), replaced the Astro starter README (placeholder "Seasoned astronaut?" + stale folder tree) with a real FFSTACK README, one conventional commit `feat: initial FFSTACK portfolio site` (61 files, 7568 insertions), `origin` remote added, `main` pushed.
+
+**Evidence (T7)**: `git ls-remote origin refs/heads/main` == local `HEAD` == `e8d719429b9e54a45383c9a95140492d7141b08d`; `git status --porcelain` empty (clean tree); sanity check confirmed 0 ignored artifacts (`node_modules`/`dist`/`.astro`) staged.
+
+**S6 (added)** — Upload: repository published to GitHub `Fran249/personal-portfolio`; Vercel deploys from `main` (`npm run build` → `dist/`).
