@@ -1,0 +1,112 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import AboutCta from "./AboutCta.astro";
+import SiteFooter from "./SiteFooter.astro";
+import SiteHeader from "./SiteHeader.astro";
+import Layout from "../layouts/Layout.astro";
+import type { ProjectPathProps } from "../utils/projects";
+import { getLocale, useTranslations } from "../i18n/utils";
+import { slugify } from "../utils/slug";
+import { projectCover } from "../utils/cover";
+
+export interface Props extends ProjectPathProps {}
+
+const { index, es, en } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const experience = locale === "es" ? es : en;
+const slug = slugify(experience.company);
+const indexLabel = String(index + 1).padStart(2, "0");
+const backHref = getRelativeLocaleUrl(locale, "hire-me");
+const contactHref = `${getRelativeLocaleUrl(locale, "")}#contact`;
+const stackItems = experience.stack.split(" · ");
+---
+
+<Layout
+	title={`${experience.company} · ${experience.role} · ${t("brand.name")}`}
+	description={experience.description}
+	theme="dark"
+>
+	<SiteHeader active="hire" theme="dark" />
+	<main class="px-6 pb-20 md:px-16 md:pb-28">
+		<div class="mx-auto w-full max-w-5xl">
+			<a
+				href={backHref}
+				class="inline-flex items-center gap-2 text-sm font-semibold text-white/60 transition-colors hover:text-accent"
+			>
+				<span aria-hidden="true">←</span>
+				{t("project.back")}
+			</a>
+
+			<!-- Hero -->
+			<section class="mt-8 md:mt-12">
+				<p class="text-xs font-semibold tracking-[0.14em] text-accent uppercase md:text-[0.8125rem]">
+					{t("experience.label")} / {indexLabel}
+				</p>
+				<h1 class="mt-4 max-w-[30ch] text-[2.75rem] leading-[1.0] font-extrabold tracking-[-0.035em] md:mt-5 md:text-[3.75rem] md:leading-[1.05]">
+					{experience.company}
+				</h1>
+				<div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/60 md:text-base">
+					<span>{experience.period}</span>
+					<span aria-hidden="true">·</span>
+					<span>{experience.role}</span>
+				</div>
+
+				<div class="mt-10 overflow-hidden rounded-xl md:mt-12">
+					<img
+						src={projectCover(slug)}
+						alt={`${t("project.coverAltPrefix")} ${experience.company}`}
+						transition:name={`project-${slug}-image`}
+						class="aspect-video h-auto w-full object-cover"
+					/>
+				</div>
+			</section>
+
+			<!-- Overview -->
+			<section class="mt-14 md:mt-20">
+				<p class="text-xs font-semibold tracking-[0.14em] text-accent uppercase md:text-[0.8125rem]">
+					{t("project.overviewLabel")}
+				</p>
+				<p class="mt-4 max-w-[62ch] text-lg leading-relaxed text-white/60 md:mt-5 md:text-xl">
+					{experience.description}
+				</p>
+			</section>
+
+			<!-- Highlights -->
+			<section class="mt-14 md:mt-20">
+				<p class="text-xs font-semibold tracking-[0.14em] text-accent uppercase md:text-[0.8125rem]">
+					{t("project.workLabel")}
+				</p>
+				<ul class="mt-6 flex max-w-[62ch] flex-col gap-3">
+					{experience.points.map((point) => (
+						<li class="flex gap-3 text-base leading-relaxed text-white/60 md:text-lg">
+							<span
+								aria-hidden="true"
+								class="mt-[0.6em] h-1 w-1 shrink-0 rounded-full bg-accent"
+							/>
+							<span>{point}</span>
+						</li>
+					))}
+				</ul>
+			</section>
+
+			<!-- Stack -->
+			<section class="mt-14 md:mt-20">
+				<p class="text-xs font-semibold tracking-[0.14em] text-accent uppercase md:text-[0.8125rem]">
+					{t("profile.stackLabel")}
+				</p>
+				<div class="mt-5 flex flex-wrap gap-2">
+					{stackItems.map((tech) => (
+						<span
+							class="rounded-full bg-night-surface px-3.5 py-1.5 text-sm font-medium text-white/70"
+						>
+							{tech.trim()}
+						</span>
+					))}
+				</div>
+			</section>
+		</div>
+	</main>
+	<AboutCta />
+	<SiteFooter theme="dark" />
+</Layout>

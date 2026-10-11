@@ -1,0 +1,26 @@
+---
+import AboutCta from '../../components/AboutCta.astro';
+import Education from '../../components/Education.astro';
+import ExperienceGallery from '../../components/ExperienceGallery.astro';
+import HireHero from '../../components/HireHero.astro';
+import Profile from '../../components/Profile.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getLocale, useTranslations } from '../../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<Layout title={t('hire.pageTitle')} description={t('hire.pageDescription')} theme="dark">
+	<SiteHeader active="hire" theme="dark" />
+	<main>
+		<HireHero />
+		<Profile />
+		<ExperienceGallery />
+		<Education />
+		<AboutCta />
+	</main>
+	<SiteFooter theme="dark" />
+</Layout>

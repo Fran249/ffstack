@@ -1,0 +1,39 @@
+---
+import { content } from "../i18n/content";
+import { getLocale, useTranslations } from "../i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const { profile, stack } = content[locale];
+---
+
+<section class="px-6 pb-16 md:px-16 md:pb-24">
+	<div class="mx-auto w-full max-w-5xl">
+		<!-- Profile -->
+		<div class="reveal">
+			<h2 class="text-xs font-semibold tracking-[0.12em] text-accent uppercase md:text-[0.8125rem]">
+				{t("profile.label")}
+			</h2>
+			<p class="mt-5 max-w-[62ch] text-lg leading-relaxed text-white/60 md:text-xl">
+				{profile}
+			</p>
+		</div>
+
+		<!-- Technical stack -->
+		<div class="reveal mt-14 md:mt-16">
+			<h2 class="text-xs font-semibold tracking-[0.12em] text-accent uppercase md:text-[0.8125rem]">
+				{t("profile.stackLabel")}
+			</h2>
+			<ul class="mt-6 flex flex-wrap gap-2.5 md:gap-3">
+				{
+					stack.map((tech) => (
+						<li class="rounded-md bg-night-surface px-3.5 py-2 text-sm font-medium text-white/80">
+							{tech}
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+</section>

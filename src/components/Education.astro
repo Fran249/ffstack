@@ -1,0 +1,29 @@
+---
+import { content } from "../i18n/content";
+import { getLocale, useTranslations } from "../i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const { education } = content[locale];
+---
+
+<section class="px-6 pb-16 md:px-16 md:pb-24">
+	<div class="mx-auto w-full max-w-5xl">
+		<h2 class="reveal text-xs font-semibold tracking-[0.12em] text-accent uppercase md:text-[0.8125rem]">
+			{t("education.label")}
+		</h2>
+		<div class="mt-6 grid gap-5 md:grid-cols-2 md:gap-6">
+			{
+				education.map((item) => (
+					<article class="reveal rounded-xl bg-night-surface p-5 md:p-7">
+						<h3 class="text-lg leading-tight font-extrabold tracking-[-0.02em] text-white md:text-xl">
+							{item.title}
+						</h3>
+						<p class="mt-2 text-base leading-relaxed text-white/60">{item.detail}</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

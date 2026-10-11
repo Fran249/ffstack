@@ -1,0 +1,52 @@
+---
+import { getLocale, useTranslations } from "../i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const fitFor = t("home.fitFor") as string[];
+const fitNot = t("home.fitNot") as string[];
+---
+
+<section class="px-6 pb-16 md:px-16 md:pb-24">
+	<div class="mx-auto w-full max-w-5xl border-t border-white/10 pt-14 md:pt-16">
+		<h2 class="max-w-[28ch] text-[2rem] leading-[1.05] font-extrabold tracking-[-0.03em] md:text-[2.5rem] text-white">
+			{t("home.fitTitle")}
+		</h2>
+
+		<div class="mt-10 grid gap-8 md:mt-12 md:grid-cols-2">
+			<!-- For -->
+			<div class="rounded-xl bg-accent/10 p-6 md:p-8 border border-accent/20">
+				<h3 class="text-sm font-semibold tracking-[0.08em] text-accent uppercase md:text-base">
+					✓ Encaja
+				</h3>
+				<ul class="mt-5 space-y-3 text-base text-white/70">
+					{
+						fitFor.map((item) => (
+							<li class="flex gap-3">
+								<span aria-hidden="true" class="shrink-0 mt-[0.5em] h-1.5 w-1.5 rounded-full bg-accent" />
+								<span>{item}</span>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<!-- Not for -->
+			<div class="rounded-xl bg-night-surface p-6 md:p-8 border border-white/10">
+				<h3 class="text-sm font-semibold tracking-[0.08em] text-white/45 uppercase md:text-base">
+					✗ No encaja
+				</h3>
+				<ul class="mt-5 space-y-3 text-base text-white/50">
+					{
+						fitNot.map((item) => (
+							<li class="flex gap-3">
+								<span aria-hidden="true" class="shrink-0 mt-[0.5em] h-1.5 w-1.5 rounded-full bg-white/20" />
+								<span>{item}</span>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>

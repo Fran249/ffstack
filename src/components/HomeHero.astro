@@ -1,0 +1,47 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLocale, useTranslations } from "../i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const calendlyUrl = t("home.calendlyUrl");
+const hireMeUrl = getRelativeLocaleUrl(locale, "hire-me");
+---
+
+<section class="px-6 pt-14 pb-14 md:px-16 md:pt-24 md:pb-16">
+	<div class="mx-auto w-full max-w-5xl">
+		<p class="text-xs font-medium tracking-[0.14em] text-accent uppercase md:text-[0.8125rem]">
+			{t("home.eyebrow")}
+		</p>
+
+		<h1 class="mt-5 max-w-[42ch] text-[2.75rem] leading-[1.02] font-extrabold tracking-[-0.035em] md:mt-6 md:text-[3.75rem] md:leading-[1.05] text-white">
+			{t("home.title")}
+		</h1>
+
+		<p class="mt-6 max-w-[54ch] text-lg leading-relaxed text-white/60 md:mt-7 md:text-xl">
+			{t("home.subtitle")}
+		</p>
+
+		<div class="mt-9 flex flex-wrap items-center gap-4">
+			<a
+				href={calendlyUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="btn-fill inline-flex border border-white/30 bg-transparent px-6 py-3.5 text-sm font-bold text-white"
+				style="--fill-color: #cdf556"
+			>
+				{t("home.ctaPrimary")}
+			</a>
+			<a
+				href={hireMeUrl}
+				class="inline-flex border border-white/20 bg-transparent px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
+			>
+				{t("home.ctaSecondary")}
+			</a>
+		</div>
+
+		<p class="mt-6 text-sm text-white/45 max-w-[54ch]">
+			Sin compromiso. Salimos con claridad sobre viabilidad, alcance y próximos pasos.
+		</p>
+	</div>
+</section>

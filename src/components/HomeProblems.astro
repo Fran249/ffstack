@@ -1,0 +1,71 @@
+---
+import { getLocale, useTranslations } from "../i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const problems = t("home.problems") as unknown as Array<{ pain: string; solution: string }>;
+
+// Card styles matching HomeServices: accent, sky, and light page color
+const cardStyles = [
+	{ bg: "bg-accent", textColor: "text-ink", solutionColor: "text-ink/80", numberColor: "text-ink" },
+	{ bg: "bg-sky", textColor: "text-ink", solutionColor: "text-ink/80", numberColor: "text-ink" },
+	{ bg: "bg-page", textColor: "text-ink", solutionColor: "text-ink/80", numberColor: "text-ink" },
+];
+
+const styledProblems = problems.map((p, i) => ({
+	...p,
+	...cardStyles[i],
+}));
+---
+
+<section class="px-6 pt-10 pb-16 md:px-16 md:pt-16 md:pb-24">
+	<div class="mx-auto w-full max-w-5xl">
+		<h2 class="max-w-[28ch] text-[2rem] leading-[1.05] font-extrabold tracking-[-0.03em] md:text-[2.5rem] text-white">
+			{t("home.problemsTitle")}
+		</h2>
+
+		<div class="mt-10 grid gap-6 md:grid-cols-3">
+			{
+				styledProblems.map((p, i) => (
+					<article class="relative rounded-xl border border-white/10 overflow-hidden" class:list={[p.bg]}>
+						<!-- Number watermark background -->
+						<div class="absolute inset-0 flex items-end justify-end pointer-events-none" aria-hidden="true">
+							<span class="text-7xl md:text-9xl font-extrabold opacity-10" class:list={[p.numberColor]}>
+								{String(i + 1).padStart(2, "0")}
+							</span>
+						</div>
+
+						<div class="relative z-10 p-6 md:p-8">
+							<h3 class="text-[1.75rem] leading-tight font-extrabold tracking-[-0.02em] md:text-[2rem]" class:list={[p.textColor]}>
+								{p.pain}
+							</h3>
+							<p class="mt-3 text-base leading-relaxed" class:list={[p.solutionColor]}>
+								{p.solution}
+							</p>
+						</div>
+					</article>
+				))
+			}
+		</div>
+
+		<a
+			href="#process"
+			class="group mt-10 flex w-fit items-center gap-3 text-lg font-semibold text-white/70 transition-colors hover:text-accent md:mt-12 md:text-xl"
+		>
+			{t("home.problemsBridge")}
+			<svg
+				aria-hidden="true"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="h-5 w-5 shrink-0 text-accent motion-safe:transition-transform motion-safe:group-hover:translate-y-1"
+			>
+				<path d="M12 5v14" />
+				<path d="m6 13 6 6 6-6" />
+			</svg>
+		</a>
+	</div>
+</section>

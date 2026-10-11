@@ -1,0 +1,51 @@
+---
+import { content } from "../i18n/content";
+import { getLocale, useTranslations } from "../i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const cardStyles = [
+	{ bg: "bg-accent", titleColor: "text-ink", descColor: "text-ink/80" },
+	{ bg: "bg-sky", titleColor: "text-ink", descColor: "text-ink/80" },
+	{ bg: "bg-night", titleColor: "text-white", descColor: "text-white/70" },
+];
+
+const services = content[locale].services.map((service, i) => ({
+	...service,
+	...cardStyles[i],
+}));
+---
+
+<section id="services" class="px-6 pb-16 md:px-16 md:pb-24">
+	<div class="mx-auto w-full max-w-5xl pt-2 md:pt-3">
+		<h2 class="max-w-[22ch] text-[2rem] leading-[1.05] font-extrabold tracking-[-0.03em] md:text-[2.5rem]">
+			{t("services.title")}
+		</h2>
+
+		<p class="mt-6 max-w-[58ch] text-lg leading-relaxed text-muted md:text-xl">
+			{t("services.intro")}
+		</p>
+
+		<div class="mt-10 grid gap-5 md:mt-12 md:grid-cols-3 md:gap-6">
+			{
+				services.map((service) => (
+					<article class:list={["rounded-xl p-7 md:p-8", service.bg]}>
+						<h3
+							class:list={[
+								"text-[1.75rem] leading-tight font-extrabold tracking-[-0.02em] md:text-[2rem]",
+								service.titleColor,
+							]}
+						>
+							<span>{service.index}</span>
+							{service.title}
+						</h3>
+						<p class:list={["mt-4 leading-relaxed text-base md:text-lg", service.descColor]}>
+							{service.description}
+						</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

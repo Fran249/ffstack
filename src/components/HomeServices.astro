@@ -1,0 +1,71 @@
+---
+import { getLocale, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const services = t("home.services") as unknown as Array<{
+	index: string;
+	title: string;
+	desc: string;
+	caseStudy: string;
+	caseLabel: string;
+}>;
+
+// Card styles: accent, sky, and light page color (not bg-night so it's visible against layout)
+const cardStyles = [
+	{ bg: "bg-accent", titleColor: "text-ink", descColor: "text-ink/80", btnColor: "text-ink", numberColor: "text-ink" },
+	{ bg: "bg-sky", titleColor: "text-ink", descColor: "text-ink/80", btnColor: "text-ink", numberColor: "text-ink" },
+	{ bg: "bg-page", titleColor: "text-ink", descColor: "text-ink/80", btnColor: "text-ink", numberColor: "text-ink" },
+];
+
+const styledServices = services.map((service, i) => ({
+	...service,
+	...cardStyles[i],
+}));
+---
+
+<section id="services" class="px-6 pb-16 md:px-16 md:pb-24">
+	<div class="mx-auto w-full max-w-5xl border-t border-white/10 pt-14 md:pt-16">
+		<h2 class="max-w-[28ch] text-[2rem] leading-[1.05] font-extrabold tracking-[-0.03em] md:text-[2.5rem] text-white">
+			{t("home.servicesTitle")}
+		</h2>
+
+		<p class="mt-4 max-w-[58ch] text-lg leading-relaxed text-white/60">
+			{t("home.servicesIntro")}
+		</p>
+
+		<div class="mt-10 grid gap-6 md:mt-12 md:grid-cols-3">
+			{
+				styledServices.map((service, i) => (
+					<article class="relative rounded-xl border border-white/10 overflow-hidden flex flex-col" class:list={[service.bg]}>
+						<!-- Number watermark background -->
+						<div class="absolute inset-0 flex items-end justify-end pointer-events-none" aria-hidden="true">
+							<span class="text-7xl md:text-9xl font-extrabold opacity-10" class:list={[service.numberColor]}>
+								{service.index.replace("/", "").padStart(2, "0")}
+							</span>
+						</div>
+
+						<div class="relative z-10 p-7 md:p-8 flex flex-col h-full">
+							<h3 class="text-[1.75rem] leading-tight font-extrabold tracking-[-0.02em] md:text-[2rem]" class:list={[service.titleColor]}>
+								{service.title}
+							</h3>
+							<p class="mt-4 flex-1 leading-relaxed text-base md:text-lg" class:list={[service.descColor]}>
+								{service.desc}
+							</p>
+
+							<!-- Link as btn-fill button: black fill, white text on hover -->
+							<a
+								href={getRelativeLocaleUrl(locale, `hire-me/${service.caseStudy}`)}
+								class="btn-fill mt-6 self-start inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-ink border border-ink"
+								style="--fill-color: #141414; --fill-text: #ffffff"
+							>
+								{service.caseLabel}
+							</a>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

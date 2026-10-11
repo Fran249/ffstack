@@ -1,0 +1,28 @@
+---
+import HomeHero from '../../components/HomeHero.astro';
+import HomeProblems from '../../components/HomeProblems.astro';
+import HomeProcess from '../../components/HomeProcess.astro';
+import HomeServices from '../../components/HomeServices.astro';
+import HomeFit from '../../components/HomeFit.astro';
+import HomeProof from '../../components/HomeProof.astro';
+import HomeFAQ from '../../components/HomeFAQ.astro';
+import HomeFinalCTA from '../../components/HomeFinalCTA.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout theme="dark">
+	<SiteHeader active="services" theme="dark" />
+	<main>
+		<HomeHero />
+		<HomeProblems />
+		<HomeProcess />
+		<HomeServices />
+		<HomeFit />
+		<HomeProof />
+		<HomeFAQ />
+		<HomeFinalCTA />
+	</main>
+	<SiteFooter />
+</Layout>

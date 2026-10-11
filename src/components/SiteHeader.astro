@@ -1,0 +1,48 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLocale, useTranslations } from "../i18n/utils";
+import LanguageSwitch from "./LanguageSwitch.astro";
+
+interface Props {
+	active?: "services" | "hire";
+	theme?: "light" | "dark";
+}
+
+const { active = "services", theme = "light" } = Astro.props;
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const links = [
+	{ id: "services", path: "", hash: "#services", label: t("nav.services") },
+	{ id: "hire", path: "hire-me", hash: "", label: t("nav.hire") },
+];
+---
+
+<header class:list={[theme === "light" ? "bg-ink" : "bg-transparent backdrop-blur-md"]} class="sticky top-0 z-50 ">
+	<div
+	class:list={[theme === "light" ? "text-white" : "text-black"]}
+		class="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4 text-white md:px-16 md:py-[1.15rem] "
+	>
+		<a href={getRelativeLocaleUrl(locale, "")} class="text-sm font-extrabold tracking-tight">FFSTACK</a>
+		<div class="flex items-center gap-5">
+			<nav class="flex items-center gap-5 text-[0.8125rem] font-medium">
+				{
+					links.map((link) => (
+						<a
+							href={`${getRelativeLocaleUrl(locale, link.path)}${link.hash}`}
+							class:list={[
+								"transition-opacity hover:opacity-70",
+								link.id === active && "underline underline-offset-4",
+							]}
+						>
+							{link.label}
+						</a>
+					))
+				}
+			</nav>
+			<span aria-hidden="true" class="h-3.5 w-px bg-white/25"></span>
+			<LanguageSwitch />
+		</div>
+	</div>
+</header>

@@ -1,0 +1,24 @@
+---
+import { getLocale, useTranslations } from "../i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<section class="px-6 pt-12 pb-12 md:px-16 md:pt-20 md:pb-16">
+	<div class="mx-auto w-full max-w-5xl">
+		<p class="text-xs font-semibold tracking-[0.12em] text-accent uppercase md:text-[0.8125rem]">
+			{t("hire.eyebrow")}
+		</p>
+
+		<h1
+			class="mt-5 max-w-[18ch] text-[3rem] leading-[0.95] font-extrabold tracking-[-0.04em] text-white md:mt-6 md:text-[4.25rem] md:leading-[1.0]"
+		>
+			{t("hire.title")}
+		</h1>
+
+		<p class="mt-6 max-w-[52ch] text-lg leading-relaxed text-white/60 md:mt-7 md:text-xl">
+			{t("hire.intro")}
+		</p>
+	</div>
+</section>

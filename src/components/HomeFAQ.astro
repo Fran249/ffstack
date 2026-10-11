@@ -1,0 +1,55 @@
+---
+import { getLocale, useTranslations } from "../i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const faq = t("home.faq") as unknown as Array<{ q: string; a: string }>;
+---
+
+<section class="px-6 pb-16 md:px-16 md:pb-24">
+	<div class="mx-auto w-full max-w-3xl border-t border-white/10 pt-14 md:pt-16">
+		<h2 class="max-w-[28ch] mx-auto text-[2rem] leading-[1.05] font-extrabold tracking-[-0.03em] md:text-[2.5rem] text-white text-center">
+			{t("home.faqTitle")}
+		</h2>
+
+		<div class="mt-10 space-y-4">
+			{
+				faq.map((item, i) => (
+					<details
+						class="group rounded-xl bg-night-surface border border-white/10 p-6 md:p-7"
+						open={i === 0}
+					>
+						<summary
+							class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold text-white md:text-xl"
+						>
+							{item.q}
+							<span
+								class="shrink-0 w-5 h-5 text-accent transition-transform duration-200 group-open:rotate-180"
+								aria-hidden="true"
+							>
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M6 9l6 6 6-6" />
+								</svg>
+							</span>
+						</summary>
+						<div class="mt-4 text-base leading-relaxed text-white/60 animate-accordion-open">
+							{item.a}
+						</div>
+					</details>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	@keyframes accordion-open {
+		from { opacity: 0; transform: translateY(-8px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+	.animate-accordion-open {
+		animation: accordion-open 0.25s ease-out;
+	}
+	details > summary { list-style: none; }
+	details > summary::-webkit-details-marker { display: none; }
+</style>

@@ -1,0 +1,139 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { content } from "../i18n/content";
+import { getLocale, useTranslations } from "../i18n/utils";
+import { slugify } from "../utils/slug";
+import { projectCover } from "../utils/cover";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const { experiences } = content[locale];
+
+// Slugs and cover art are derived from the company name so es/en never drift.
+const slugifiedExperiences = experiences.map((experience) => ({
+	...experience,
+	slug: slugify(experience.company),
+}));
+---
+
+<section class="horizontal-gallery px-6 pb-16 md:px-16 md:pb-24">
+	<div class="mx-auto w-full max-w-5xl">
+		<!-- Tall wrapper: its height = horizontal travel + 1 viewport -->
+		<div class="h-scroll-wrapper" id="hScrollWrapper">
+			<!-- Sticky viewport: pinned while the wrapper scrolls -->
+			<div class="h-scroll-sticky" id="hScrollSticky">
+				<div class="h-scroll-track" id="hScrollTrack">
+					{
+						slugifiedExperiences.map((experience, i) => {
+							const index = String(i + 1).padStart(2, "0");
+							const slug = experience.slug;
+							const detailHref = getRelativeLocaleUrl(
+								locale,
+								`hire-me/${slug}`,
+							);
+							return (
+								<a
+									href={detailHref}
+									class="group relative block aspect-[4/3] h-scroll-card overflow-hidden rounded-xl"
+								>
+									<!-- Cover image: same transition:name as the detail page -->
+									<img
+										src={projectCover(slug)}
+										alt={`${t("project.coverAltPrefix")} ${experience.company}`}
+										transition:name={`project-${slug}-image`}
+										loading="lazy"
+										class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+									/>
+									<div
+										class="absolute inset-0 bg-gradient-to-t from-night/90 via-night/25 to-night/50"
+										aria-hidden="true"
+									/>
+									<div class="absolute inset-x-0 top-0 flex items-start justify-between p-5 md:p-6">
+										<p class="text-xs font-semibold tracking-[0.12em] text-white/75 uppercase">
+											{t("experience.label")} / {index}
+										</p>
+										<span
+											aria-hidden="true"
+											class="text-lg leading-none text-white/75 transition-transform duration-300 group-hover:rotate-45 motion-reduce:transition-none"
+										>
+											↗
+										</span>
+									</div>
+									<div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
+										<h3 class="text-[1.75rem] leading-tight font-extrabold tracking-[-0.025em] text-white md:text-[2rem]">
+											{experience.company}
+										</h3>
+									</div>
+								</a>
+							);
+						})
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	function initHorizontalScroll() {
+		const prefersReduced = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		).matches;
+		const isMobile = window.innerWidth < 768;
+
+		const wrapper = document.getElementById("hScrollWrapper");
+		const sticky = document.getElementById("hScrollSticky");
+		const track = document.getElementById("hScrollTrack");
+		if (!wrapper || !sticky || !track) return;
+
+		// Fallback: vertical stack (mobile or reduced motion)
+		if (prefersReduced || isMobile) {
+			wrapper.classList.add("h-scroll-static");
+			wrapper.style.height = "";
+			track.style.transform = "";
+			return;
+		}
+		wrapper.classList.remove("h-scroll-static");
+
+		const cleanup = () => {
+			window.removeEventListener("scroll", update);
+			window.removeEventListener("resize", update);
+		};
+
+		function measure() {
+			// Travel = full track width minus the visible viewport width.
+			const travel = track.scrollWidth - sticky.clientWidth;
+			if (travel <= 0) {
+				cleanup();
+				wrapper.classList.add("h-scroll-static");
+				wrapper.style.height = "";
+				return false;
+			}
+			// Wrapper height: enough vertical scroll to map 0..1 progress
+			wrapper.style.height = `${travel + window.innerHeight}px`;
+			return true;
+		}
+
+		function update() {
+			const travel = track.scrollWidth - sticky.clientWidth;
+			if (travel <= 0) return;
+			// Progress: 0 when wrapper top reaches viewport top, 1 when
+			// wrapper bottom reaches viewport bottom (sticky unpins).
+			const rect = wrapper.getBoundingClientRect();
+			const progress = Math.min(Math.max(-rect.top / travel, 0), 1);
+			track.style.transform = `translateX(${-progress * travel}px)`;
+		}
+
+		cleanup();
+		if (!measure()) return;
+		window.addEventListener("scroll", update, { passive: true });
+		window.addEventListener("resize", () => {
+			if (measure()) update();
+		}, { passive: true });
+		update();
+	}
+
+	initHorizontalScroll();
+	document.addEventListener("astro:after-swap", initHorizontalScroll);
+</script>

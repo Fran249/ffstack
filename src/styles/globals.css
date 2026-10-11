@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+@theme {
+	--font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+	--color-page: #f2f0eb;
+	--color-surface: #e9e7e0;
+	--color-ink: #141414;
+	--color-ink-soft: #4f4f49;
+	--color-muted: #75746c;
+	--color-line: #d9d7d0;
+
+	--color-night: #131313;
+	--color-night-surface: #1c1d19;
+	--color-accent: #cdf556;
+	--color-sky: #b8d4f7;
+}
+
+html {
+	scroll-behavior: smooth;
+	background-color: var(--color-page);
+	color: var(--color-ink);
+}
+
+body {
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+}
+
+/* ─── Button fill animation (right → left) ─────────────────────────── */
+.btn-fill {
+	background-image: linear-gradient(to left, var(--fill-color, currentColor) 100%, transparent 100%);
+	background-size: 0% 100%;
+	background-repeat: no-repeat;
+	background-position: right;
+	transition: background-size 0.3s ease-out, color 0.3s ease-out;
+}
+
+.btn-fill:hover,
+.btn-fill:focus-visible {
+	background-size: 100% 100%;
+}
+
+/* Text color flips once the fill covers the label (skipped when motion is reduced) */
+@media (prefers-reduced-motion: no-preference) {
+	.btn-fill:hover,
+	.btn-fill:focus-visible {
+		color: var(--fill-text, currentColor);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.btn-fill {
+		background-image: none;
+		transition: none;
+	}
+}
+
+/* ─── Hero typewriter (type → pause → delete → loop) ────────────────── */
+.hero-line {
+	display: inline-block;
+}
+
+.hero-line.is-typing::after {
+	content: "";
+	display: inline-block;
+	width: 0.055em;
+	height: 0.8em;
+	margin-left: 0.07em;
+	background: currentColor;
+	vertical-align: -0.06em;
+	animation: hero-caret-blink 0.85s step-end infinite;
+}
+
+@keyframes hero-caret-blink {
+	50% {
+		opacity: 0;
+	}
+}
+
+/* ─── Scroll reveal (generic, IntersectionObserver-driven) ──────────── */
+.reveal {
+	opacity: 0;
+	transform: translateY(24px) scale(0.97);
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.is-visible {
+	opacity: 1;
+	transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reveal {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
+
+/* ─── Horizontal scroll gallery (hire-me) ───────────────────────────── */
+.horizontal-gallery {
+	overflow: clip;
+}
+
+.h-scroll-sticky {
+	position: sticky;
+	top: 0;
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+}
+
+.h-scroll-track {
+	display: flex;
+	align-items: stretch;
+	gap: 1.5rem;
+	will-change: transform;
+}
+
+.h-scroll-card {
+	flex: 0 0 min(85vw, 42rem);
+}
+
+/* Fallback: vertical stack (mobile / reduced motion / no travel) */
+.h-scroll-static .h-scroll-sticky {
+	position: static;
+	height: auto;
+	overflow: visible;
+	display: block;
+}
+
+.h-scroll-static .h-scroll-track {
+	flex-direction: column;
+	transform: none !important;
+}
+
+.h-scroll-static .h-scroll-card {
+	flex: none;
+	width: 100%;
+}
+
+/* CSS-only fallbacks in case the script never runs */
+@media (max-width: 767px) {
+	.h-scroll-sticky {
+		position: static;
+		height: auto;
+		overflow: visible;
+		display: block;
+	}
+
+	.h-scroll-track {
+		flex-direction: column;
+	}
+
+	.h-scroll-card {
+		flex: none;
+		width: 100%;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.h-scroll-sticky {
+		position: static;
+		height: auto;
+		overflow: visible;
+		display: block;
+	}
+
+	.h-scroll-track {
+		flex-direction: column;
+		transform: none !important;
+	}
+
+	.h-scroll-card {
+		flex: none;
+		width: 100%;
+	}
+}

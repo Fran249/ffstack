@@ -1,0 +1,21 @@
+---
+import { getLocale, useTranslations } from "../i18n/utils";
+
+interface Props {
+	theme?: "light" | "dark";
+}
+
+const { theme = "light" } = Astro.props;
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<footer class:list={[theme === "light" ? "bg-ink" : "bg-transparent border-t border-white/10"]}>
+	<div
+		class="mx-auto flex w-full max-w-5xl flex-col gap-1.5 px-6 py-5 text-xs text-white md:flex-row md:items-center md:justify-between md:px-16 md:text-sm"
+	>
+		<p>&copy; 2026 Francisco Lopez</p>
+		<p class="text-white/70">{t("footer.tagline")}</p>
+	</div>
+</footer>

@@ -1,0 +1,53 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languages } from "../i18n/ui";
+import { getLocale, stripLocale, useTranslations } from "../i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+// Links to the same page in the other locale: `/hire-me` ↔ `/en/hire-me`.
+const routePath = stripLocale(Astro.url.pathname);
+---
+
+<div
+	class="flex items-center gap-1.5 text-[0.8125rem] font-medium"
+	role="group"
+	aria-label={t("nav.languageSwitch")}
+>
+	{
+		locale === "es" ? (
+			<span lang="es" aria-current="true" class="underline underline-offset-4">
+				ES
+			</span>
+		) : (
+			<a
+				href={getRelativeLocaleUrl("es", routePath)}
+				lang="es"
+				hreflang="es"
+				aria-label={languages.es}
+				class="transition-opacity hover:opacity-70"
+			>
+				ES
+			</a>
+		)
+	}
+	<span aria-hidden="true" class="text-white/40">/</span>
+	{
+		locale === "en" ? (
+			<span lang="en" aria-current="true" class="underline underline-offset-4">
+				EN
+			</span>
+		) : (
+			<a
+				href={getRelativeLocaleUrl("en", routePath)}
+				lang="en"
+				hreflang="en"
+				aria-label={languages.en}
+				class="transition-opacity hover:opacity-70"
+			>
+				EN
+			</a>
+		)
+	}
+</div>

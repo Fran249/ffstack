@@ -1,0 +1,27 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLocale, useTranslations } from "../i18n/utils";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<section class="px-6 pb-16 md:px-16 md:pb-24">
+	<div class="mx-auto w-full max-w-5xl">
+		<h2 class="max-w-[18ch] text-[2rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-white md:text-[2.5rem]">
+			{t("about.title")}
+		</h2>
+
+		<p class="mt-6 max-w-[54ch] text-lg leading-relaxed text-white/60 md:text-xl">
+			{t("about.intro")}
+		</p>
+
+		<a
+			href={`${getRelativeLocaleUrl(locale, "")}#contact`}
+			class="btn-fill mt-8 inline-flex border border-accent bg-transparent px-6 py-3.5 text-sm font-bold text-accent"
+			style="--fill-color: #cdf556; --fill-text: #131313"
+		>
+			{t("about.cta")}
+		</a>
+	</div>
+</section>
