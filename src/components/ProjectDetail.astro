@@ -1,13 +1,14 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import AboutCta from "./AboutCta.astro";
+import ProjectCarousel from "./ProjectCarousel.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
 import Layout from "../layouts/Layout.astro";
 import type { ProjectPathProps } from "../utils/projects";
 import { getLocale, useTranslations } from "../i18n/utils";
 import { slugify } from "../utils/slug";
-import { projectCover } from "../utils/cover";
+import { projectGallery } from "../utils/media";
 
 export interface Props extends ProjectPathProps {}
 
@@ -52,12 +53,11 @@ const stackItems = experience.stack.split(" · ");
 					<span>{experience.role}</span>
 				</div>
 
-				<div class="mt-10 overflow-hidden rounded-xl md:mt-12">
-					<img
-						src={projectCover(slug)}
-						alt={`${t("project.coverAltPrefix")} ${experience.company}`}
-						transition:name={`project-${slug}-image`}
-						class="aspect-video h-auto w-full object-cover"
+				<div class="mt-10 md:mt-12">
+					<ProjectCarousel
+						slug={slug}
+						label={experience.company}
+						images={projectGallery(slug)}
 					/>
 				</div>
 			</section>

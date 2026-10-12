@@ -120,6 +120,20 @@ const es: SiteContent = {
 			],
 		},
 		{
+			company: "Loto Negro",
+			description:
+				"E-commerce de joyería de alta calidad para un estudio de tatuajes y piercings. Panel de administración propio, integración con MercadoPago y lógica de backend en Cloud Functions, construido con React, Tailwind y Firebase (Firestore y Storage).",
+			period: "2024 – Presente",
+			role: "Desarrollador Freelance",
+			stack: "React · Tailwind · Firebase · Firestore · Storage · Cloud Functions · MercadoPago",
+			points: [
+				"Desarrollé un e-commerce de joyería de alta calidad para un estudio de tatuajes y piercings, en React y Tailwind.",
+				"Panel de administración para gestionar productos, pedidos y contenido del catálogo.",
+				"Integración con MercadoPago y lógica de backend en Cloud Functions.",
+				"Catálogo y media gestionados con Firestore y Storage de Firebase.",
+			],
+		},
+		{
 			company: "Rentive Capital",
 			description:
 				"Plataforma de inversión construida con Next.js, Firebase y Cloud Functions, con lógica financiera centralizada y fuerte foco en rendimiento de carga.",
@@ -239,6 +253,20 @@ const en: SiteContent = {
 			points: [
 				"Developed a handcrafted e-commerce platform focused on individual sales, with integrated checkout, real-time payment webhooks, and automated transactional emails.",
 				"Built a Tauri v2 dashboard that centralizes product, order, and content management in one place.",
+			],
+		},
+		{
+			company: "Loto Negro",
+			description:
+				"High-quality jewelry e-commerce for a tattoo and piercing studio. Custom admin dashboard, MercadoPago integration, and backend logic on Cloud Functions, built with React, Tailwind, and Firebase (Firestore and Storage).",
+			period: "2024 – Present",
+			role: "Freelance Developer",
+			stack: "React · Tailwind · Firebase · Firestore · Storage · Cloud Functions · MercadoPago",
+			points: [
+				"Built a high-quality jewelry e-commerce for a tattoo and piercing studio using React and Tailwind.",
+				"Admin dashboard to manage products, orders, and catalog content.",
+				"MercadoPago integration and backend logic on Cloud Functions.",
+				"Catalog and media managed with Firebase Firestore and Storage.",
 			],
 		},
 		{

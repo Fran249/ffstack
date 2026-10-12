@@ -24,7 +24,7 @@ npm run preview    # preview the production build
 - `src/pages/` — Spanish routes (`/`, `/hire-me`, `/hire-me/<slug>`); `src/pages/en/` holds the English equivalents
 - `src/i18n/` — hand-authored dictionaries (`ui.ts`) and experience content (`content.ts`), both locales
 - `src/components/` — home sections, experience gallery, project detail, header/footer
-- `public/projects/<slug>.svg` — project cover images; drop a real screenshot over the path (or edit `src/utils/cover.ts`) to replace a cover
+- `public/projects/<prefix>-<n>.webp` — project screenshots, numbered from 1 (the first one is the `/hire-me` gallery thumbnail); prefixes and counts live in `src/utils/media.ts`
 - `odd/tasks/` — feature working documents (specs, tasks, verification log)
 
 ## Deploy

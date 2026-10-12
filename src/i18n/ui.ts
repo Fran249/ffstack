@@ -95,11 +95,17 @@ const es = {
 	"project.outcomeLabel": "Resultado",
 	"project.highlightsLabel": "En detalle",
 	"project.workLabel": "Trabajo realizado",
+	"project.galleryLabel": "Galería del proyecto",
+	"project.slideAltPrefix": "Captura",
+	"project.prevImage": "Imagen anterior",
+	"project.nextImage": "Imagen siguiente",
+	"project.goToImage": "Ir a la imagen",
 
 	// Home — new hero
 	"home.eyebrow": "Desarrollador Fullstack Freelance",
 	"home.title": "Tu próximo producto, construido para crecer.",
 	"home.subtitle": "Sitios web y aplicaciones a medida que convierten tu idea en algo que la gente usa de verdad. Sin plantillas, sin relleno.",
+	"home.heroNote": "Sin compromiso. Salimos con claridad sobre viabilidad, alcance y próximos pasos.",
 	"home.ctaPrimary": "Agenda una llamada de 30 min",
 	"home.ctaSecondary": "Ver casos reales",
 
@@ -199,7 +205,7 @@ const es = {
 	"home.faq": [
 		{
 			"q": "¿Cuánto cuesta un proyecto?",
-			"a": "No hay precio único: un MVP arranca en ~$5k USD, una plataforma compleja $20k+. En la llamada definimos alcance y te doy precio cerrado por escrito."
+			"a": "Depende del tipo de proyecto: web simple desde USD 250, sitio corporativo desde USD 500, e-commerce desde USD 900 y sistema a medida desde USD 1.500. Probá la calculadora de acá abajo para una referencia al instante; el precio final se cierra por escrito según alcance."
 		},
 		{
 			"q": "¿Cuánto tarda en estar listo?",
@@ -211,11 +217,54 @@ const es = {
 		},
 		{
 			"q": "¿Das mantenimiento después del lanzamiento?",
-			"a": "Incluyo 30 días de soporte post-lanzamiento. Después ofrecemos retención mensual o te dejo todo documentado para que sigas tú."
+			"a": "Cada proyecto incluye 30 días de soporte post-lanzamiento. Después ofrezco un plan mensual de mantenimiento y gestión de infraestructura, calculado como un porcentaje del proyecto según su tipo (3–6% mensual, con un mínimo). La nube siempre se factura aparte, a nombre del cliente."
 		},
 		{
 			"q": "¿Trabajas con mi stack actual o impones el tuyo?",
 			"a": "Me adapto si tu stack tiene sentido técnico. Si no, propongo migración justificada. La decisión siempre es tuya."
+		}
+	],
+
+	// Home — pricing calculator
+	"home.calcTitle": "Calculá tu proyecto",
+	"home.calcSubtitle": "Elegí el tipo de web y te muestro una referencia de precio y mantenimiento mensual. El presupuesto final se cierra por escrito según alcance.",
+	"home.calcBuildLabel": "Precio del proyecto",
+	"home.calcCareLabel": "Mantenimiento mensual",
+	"home.calcCareUnit": "/mes",
+	"home.calcCarePctSuffix": "del proyecto",
+	"home.calcNote": "El mantenimiento es un servicio: incluye actualizaciones, soporte y gestión de la infraestructura. La nube siempre se factura aparte, a nombre del cliente.",
+	"home.calcTiers": [
+		{
+			"id": "simple",
+			"name": "Web simple",
+			"desc": "Landing o sitio de pocas secciones, con diseño a medida y formulario de contacto.",
+			"build": [250, 400],
+			"pct": 3,
+			"floor": 15
+		},
+		{
+			"id": "corporate",
+			"name": "Sitio corporativo",
+			"desc": "Estructura multi-página (5 a 10 secciones) con foco en conversión.",
+			"build": [500, 800],
+			"pct": 4,
+			"floor": 20
+		},
+		{
+			"id": "shop",
+			"name": "E-commerce / tienda",
+			"desc": "Catálogo, carrito, pagos con MercadoPago y panel de administración.",
+			"build": [900, 1500],
+			"pct": 5,
+			"floor": 40
+		},
+		{
+			"id": "system",
+			"name": "Sistema a medida / MVP",
+			"desc": "Plataforma o sistema con lógica de backend, usuarios y datos reales.",
+			"build": [1500, 2500],
+			"pct": 6,
+			"floor": 80
 		}
 	],
 
@@ -227,6 +276,8 @@ const es = {
 
 	// For whom / not for
 	"home.fitTitle": "Esto es para ti si…",
+	"home.fitForTitle": "Encaja",
+	"home.fitNotTitle": "No encaja",
 	"home.fitFor": [
 		"Buscas un socio técnico que piense en negocio, no solo en código",
 		"Valoras la comunicación clara y entregas visibles cada semana",
@@ -239,7 +290,7 @@ const es = {
 	],
 
 	// Calendly placeholder
-	"home.calendlyUrl": "https://calendly.com/tu-usuario/30min",
+	"home.calendlyUrl": "https://calendly.com/franlopez9724/30min",
 } as const;
 
 export type UIKey = keyof typeof es;
@@ -324,11 +375,17 @@ const en: Record<UIKey, string> = {
 	"project.outcomeLabel": "Outcome",
 	"project.highlightsLabel": "In detail",
 	"project.workLabel": "Work delivered",
+	"project.galleryLabel": "Project gallery",
+	"project.slideAltPrefix": "Screenshot",
+	"project.prevImage": "Previous image",
+	"project.nextImage": "Next image",
+	"project.goToImage": "Go to image",
 
 	// Home — new hero
 	"home.eyebrow": "Freelance Fullstack Developer",
 	"home.title": "Your next product, built to grow.",
 	"home.subtitle": "Custom websites and web apps that turn your idea into something people actually use. No templates, no fluff.",
+	"home.heroNote": "No commitment. We walk away with clarity on viability, scope, and next steps.",
 	"home.ctaPrimary": "Book a 30-min call",
 	"home.ctaSecondary": "See real cases",
 
@@ -428,7 +485,7 @@ const en: Record<UIKey, string> = {
 	"home.faq": [
 		{
 			"q": "How much does a project cost?",
-			"a": "No fixed price: MVP starts at ~$5k USD, complex platform $20k+. On the call we define scope and I give you a fixed written quote."
+			"a": "It depends on the type of project: simple website from USD 250, corporate site from USD 500, e-commerce from USD 900, and custom system from USD 1,500. Try the calculator below for an instant reference; the final price is closed in writing by scope."
 		},
 		{
 			"q": "How long until it's ready?",
@@ -440,11 +497,54 @@ const en: Record<UIKey, string> = {
 		},
 		{
 			"q": "Do you provide maintenance after launch?",
-			"a": "30 days of post-launch support included. After that, monthly retainer or full handover with docs."
+			"a": "Every project includes 30 days of post-launch support. After that I offer a monthly maintenance and infrastructure management plan, calculated as a percentage of the project by type (3–6% monthly, with a minimum). Cloud costs are always billed separately, in the client's name."
 		},
 		{
 			"q": "Do you work with my current stack or impose yours?",
 			"a": "I adapt if your stack makes technical sense. If not, I propose justified migration. The call is always yours."
+		}
+	],
+
+	// Home — pricing calculator
+	"home.calcTitle": "Estimate your project",
+	"home.calcSubtitle": "Pick the type of website and get a reference for price and monthly maintenance. The final quote is closed in writing by scope.",
+	"home.calcBuildLabel": "Project price",
+	"home.calcCareLabel": "Monthly maintenance",
+	"home.calcCareUnit": "/mo",
+	"home.calcCarePctSuffix": "of the project",
+	"home.calcNote": "Maintenance is a service: it covers updates, support, and infrastructure management. Cloud costs are billed separately, in the client's name.",
+	"home.calcTiers": [
+		{
+			"id": "simple",
+			"name": "Simple website",
+			"desc": "Landing or a small site with custom design and a contact form.",
+			"build": [250, 400],
+			"pct": 3,
+			"floor": 15
+		},
+		{
+			"id": "corporate",
+			"name": "Corporate site",
+			"desc": "Multi-page structure (5–10 sections) focused on conversion.",
+			"build": [500, 800],
+			"pct": 4,
+			"floor": 20
+		},
+		{
+			"id": "shop",
+			"name": "E-commerce / store",
+			"desc": "Catalog, cart, MercadoPago payments, and an admin dashboard.",
+			"build": [900, 1500],
+			"pct": 5,
+			"floor": 40
+		},
+		{
+			"id": "system",
+			"name": "Custom system / MVP",
+			"desc": "Platform or system with backend logic, users, and real data.",
+			"build": [1500, 2500],
+			"pct": 6,
+			"floor": 80
 		}
 	],
 
@@ -456,6 +556,8 @@ const en: Record<UIKey, string> = {
 
 	// For whom / not for
 	"home.fitTitle": "This is for you if…",
+	"home.fitForTitle": "Fits you",
+	"home.fitNotTitle": "Not for you",
 	"home.fitFor": [
 		"You want a technical partner who thinks in business, not just code",
 		"You value clear communication and visible weekly deliveries",
@@ -468,7 +570,7 @@ const en: Record<UIKey, string> = {
 	],
 
 	// Calendly placeholder
-	"home.calendlyUrl": "https://calendly.com/your-user/30min",
+	"home.calendlyUrl": "https://calendly.com/franlopez9724/30min",
 };
 
 export const ui: Record<Locale, Record<UIKey, string>> = { es, en };

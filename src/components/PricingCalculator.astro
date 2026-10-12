@@ -1,0 +1,22 @@
+---
+import { getLocale, useTranslations } from "../i18n/utils";
+import PricingCalculator, { type CalcTier } from "./PricingCalculator";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const tiers = t("home.calcTiers") as unknown as CalcTier[];
+---
+
+<PricingCalculator
+	client:only="react"
+	locale={locale}
+	title={t("home.calcTitle")}
+	subtitle={t("home.calcSubtitle")}
+	buildLabel={t("home.calcBuildLabel")}
+	careLabel={t("home.calcCareLabel")}
+	careUnit={t("home.calcCareUnit")}
+	carePctSuffix={t("home.calcCarePctSuffix")}
+	note={t("home.calcNote")}
+	tiers={tiers}
+/>

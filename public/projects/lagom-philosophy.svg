@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
-  <rect width="1600" height="1000" fill="#f2f0eb"/>
-  <circle cx="1180" cy="300" r="420" fill="#131313" opacity="0.09"/>
-  <circle cx="260" cy="840" r="320" fill="#131313" opacity="0.07"/>
-  <text x="1180" y="760" font-family="Inter, system-ui, sans-serif" font-size="560" font-weight="800" fill="#131313" opacity="0.08" letter-spacing="-20">03</text>
-  <text x="120" y="880" font-family="Inter, system-ui, sans-serif" font-size="116" font-weight="800" fill="#131313" letter-spacing="-4">Lagom Philosophy</text>
-</svg>
