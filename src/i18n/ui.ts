@@ -59,6 +59,9 @@ const es = {
 	"contact.messageLabel": "¿Qué estás construyendo?",
 	"contact.messagePlaceholder": "Cuéntame sobre tu proyecto, los plazos y tus objetivos…",
 	"contact.submit": "Enviar consulta",
+	"contact.sending": "Enviando…",
+	"contact.success": "¡Gracias! Te respondo a la brevedad.",
+	"contact.error": "No se pudo enviar. Probá de nuevo en un momento.",
 
 	// Footer
 	"footer.tagline": "Pensado con criterio. De punta a punta.",
@@ -339,6 +342,9 @@ const en: Record<UIKey, string> = {
 	"contact.messageLabel": "What are you building?",
 	"contact.messagePlaceholder": "Tell me about your project, timeline, and goals...",
 	"contact.submit": "Send inquiry",
+	"contact.sending": "Sending…",
+	"contact.success": "Thanks! I'll get back to you shortly.",
+	"contact.error": "Something went wrong. Please try again in a moment.",
 
 	// Footer
 	"footer.tagline": "Thoughtfully built. Front to back.",

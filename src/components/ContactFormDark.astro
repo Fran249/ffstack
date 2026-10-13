@@ -3,11 +3,20 @@ import { getLocale, useTranslations } from "../i18n/utils";
 
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
+
+// Client-safe (PUBLIC_) EmailJS configuration. Resolved at build time on the
+// server and rendered into the form's data attributes, so the client script
+// never depends on a bundler env replacement. Set these on Vercel too.
+const emailjs = {
+	serviceId: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID ?? "",
+	templateId: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID ?? "",
+	publicKey: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY ?? "",
+};
 ---
 
 <section id="contact" class="px-6 pt-16 pb-20 md:px-16 md:pt-24 md:pb-28">
 	<div class="mx-auto w-full max-w-5xl">
-		<h2 class="max-w-[22ch] text-[2rem] leading-[1.05] font-extrabold tracking-[-0.03em] md:text-[2.25rem] text-white">
+		<h2 class="max-w-[22ch] text-[2rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-white">
 			{t("contact.title")}
 		</h2>
 
@@ -15,7 +24,18 @@ const t = useTranslations(locale);
 			{t("contact.intro")}
 		</p>
 
-		<form class="mt-10 flex max-w-[40rem] flex-col gap-6" method="post" action="#">
+		<form
+			class="mt-10 flex max-w-[40rem] flex-col gap-6"
+			method="post"
+			action="#"
+			data-contact-form
+			data-service-id={emailjs.serviceId}
+			data-template-id={emailjs.templateId}
+			data-public-key={emailjs.publicKey}
+			data-msg-sending={t("contact.sending")}
+			data-msg-success={t("contact.success")}
+			data-msg-error={t("contact.error")}
+		>
 			<div class="flex flex-col gap-2">
 				<label for="name" class="text-sm font-semibold text-white">{t("contact.nameLabel")}</label>
 				<input
@@ -53,11 +73,79 @@ const t = useTranslations(locale);
 
 			<button
 				type="submit"
-				class="cursor-pointer btn-fill mt-2 inline-flex min-w-[14rem] justify-center border border-accent bg-transparent px-8 py-3.5 text-sm font-bold text-accent"
+				class="cursor-pointer btn-fill mt-2 inline-flex min-w-[14rem] justify-center border border-accent bg-transparent px-8 py-3.5 text-sm font-bold text-accent disabled:cursor-not-allowed disabled:opacity-60"
 				style="--fill-color: #cdf556; --fill-text: #131313"
 			>
 				{t("contact.submit")}
 			</button>
+
+			<p class="text-sm text-white/60" data-contact-status aria-live="polite"></p>
 		</form>
 	</div>
 </section>
+
+<script>
+	import emailjs from "@emailjs/browser";
+
+	type Status = "sending" | "success" | "error";
+
+	const initContactForms = () => {
+		document.querySelectorAll<HTMLFormElement>("form[data-contact-form]").forEach((form) => {
+			if (form.dataset.contactBound === "true") return;
+			form.dataset.contactBound = "true";
+
+			const status = form.querySelector<HTMLElement>("[data-contact-status]");
+			const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+			const setStatus = (message: string, state: Status) => {
+				if (!status) return;
+				status.textContent = message;
+				status.className =
+					"text-sm " +
+					(state === "success"
+						? "text-accent"
+						: state === "error"
+							? "text-red-400"
+							: "text-white/60");
+			};
+
+			form.addEventListener("submit", async (event) => {
+				event.preventDefault();
+
+				const serviceId = form.dataset.serviceId;
+				const templateId = form.dataset.templateId;
+				const publicKey = form.dataset.publicKey;
+
+				if (!serviceId || !templateId || !publicKey) {
+					console.error("[contact] Missing EmailJS configuration (service/template/public key).");
+					setStatus(form.dataset.msgError ?? "", "error");
+					return;
+				}
+
+				const data = new FormData(form);
+				const params = {
+					name: String(data.get("name") ?? ""),
+					email: String(data.get("email") ?? ""),
+					message: String(data.get("message") ?? ""),
+				};
+
+				button?.setAttribute("disabled", "true");
+				setStatus(form.dataset.msgSending ?? "", "sending");
+
+				try {
+					await emailjs.send(serviceId, templateId, params, { publicKey });
+					form.reset();
+					setStatus(form.dataset.msgSuccess ?? "", "success");
+				} catch (error) {
+					console.error("[contact] EmailJS send failed:", error);
+					setStatus(form.dataset.msgError ?? "", "error");
+				} finally {
+					button?.removeAttribute("disabled");
+				}
+			});
+		});
+	};
+
+	document.addEventListener("astro:page-load", initContactForms);
+	initContactForms();
+</script>
