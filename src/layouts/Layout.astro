@@ -4,7 +4,7 @@ import "../styles/globals.css";
 import { ClientRouter } from "astro:transitions";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { getLocale, stripLocale, useTranslations } from "../i18n/utils";
-
+import Analytics from '@vercel/analytics/astro'
 interface Props {
 	title?: string;
 	description?: string;
@@ -54,6 +54,7 @@ const ogImage = new URL(locale === "es" ? "/og.png" : "/og-en.png", site);
 		<link rel="alternate" hreflang="en" href={getRelativeLocaleUrl("en", routePath)} />
 		<link rel="alternate" hreflang="x-default" href={getRelativeLocaleUrl("es", routePath)} />
 		<link rel="canonical" href={canonical} />
+		<Analytics />
 		<title>{title}</title>
 		<ClientRouter />
 	</head>
