@@ -65,6 +65,8 @@ const es = {
 
 	// Footer
 	"footer.tagline": "Pensado con criterio. De punta a punta.",
+	"footer.linkedin": "LinkedIn",
+	"footer.github": "GitHub",
 
 	// Hire me — closing CTA
 	"about.title": "La persona detrás del proyecto.",
@@ -348,6 +350,8 @@ const en: Record<UIKey, string> = {
 
 	// Footer
 	"footer.tagline": "Thoughtfully built. Front to back.",
+	"footer.linkedin": "LinkedIn",
+	"footer.github": "GitHub",
 
 	// Hire me — closing CTA
 	"about.title": "The person behind the build.",
