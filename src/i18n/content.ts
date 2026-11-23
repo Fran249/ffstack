@@ -52,6 +52,9 @@ const stack = [
 	"CI/CD",
 	"MercadoPago",
 	"Tauri v2",
+	"IA",
+	"OpenCode",
+	"Multi-agentes",
 ];
 
 const es: SiteContent = {
