@@ -22,7 +22,7 @@ interface ProjectMediaEntry {
 
 const media: Record<string, ProjectMediaEntry> = {
 	"kic-market": { prefix: "kic", count: 6 },
-	levelup: { prefix: "levelup", count: 6 },
+	"axl-gaming-store": { prefix: "levelup", count: 6 },
 	"lagom-philosophy": { prefix: "lagom", count: 5 },
 	"loto-negro": { prefix: "loto", count: 4 },
 	"rentive-capital": { prefix: "rentive", count: 4 },

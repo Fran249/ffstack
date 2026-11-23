@@ -21,6 +21,14 @@ const indexLabel = String(index + 1).padStart(2, "0");
 const backHref = getRelativeLocaleUrl(locale, "hire-me");
 const contactHref = `${getRelativeLocaleUrl(locale, "")}#contact`;
 const stackItems = experience.stack.split(" · ");
+
+const productionDomains = [
+	"cxp-resources.com",
+	"rentivecapital.com",
+	"hugoprieto.com.ar",
+];
+const isProductionLink = (url?: string) =>
+	!!url && productionDomains.some((domain) => url.includes(domain));
 ---
 
 <Layout
@@ -52,6 +60,24 @@ const stackItems = experience.stack.split(" · ");
 					<span aria-hidden="true">·</span>
 					<span>{experience.role}</span>
 				</div>
+
+				{experience.url && (
+					<div class="mt-4 flex items-center gap-2 text-sm text-accent md:text-base">
+						<span class="font-semibold uppercase tracking-wider">
+							{isProductionLink(experience.url)
+								? t("experience.productionLabel")
+								: t("experience.demoLabel")}
+						</span>
+						<a
+							href={experience.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="underline underline-offset-4 hover:text-accent transition-colors"
+						>
+							{experience.url}
+						</a>
+					</div>
+				)}
 
 				<div class="mt-10 md:mt-12">
 					<ProjectCarousel

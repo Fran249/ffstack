@@ -87,6 +87,8 @@ const es = {
 	"profile.label": "Perfil",
 	"profile.stackLabel": "Stack técnico",
 	"experience.label": "Experiencia",
+	"experience.productionLabel": "Web en producción",
+	"experience.demoLabel": "Demo en vivo",
 	"education.label": "Educación e idiomas",
 
 	// Project detail page
@@ -195,7 +197,7 @@ const es = {
 		},
 		{
 			"quote": "El panel de administración en Tauri nos ahorra horas cada semana. Gestionamos todo desde un solo lugar.",
-			"author": "Fundador, LevelUp",
+			"author": "Fundador, Axl Gaming Store",
 			"role": "E-commerce gaming multi-plataforma"
 		},
 		{
@@ -372,6 +374,8 @@ const en: Record<UIKey, string> = {
 	"profile.label": "Profile",
 	"profile.stackLabel": "Technical stack",
 	"experience.label": "Experience",
+	"experience.productionLabel": "Production site",
+	"experience.demoLabel": "Live demo",
 	"education.label": "Education & languages",
 
 	// Project detail page
@@ -480,7 +484,7 @@ const en: Record<UIKey, string> = {
 		},
 		{
 			"quote": "The Tauri admin panel saves us hours every week. We manage everything from one place.",
-			"author": "Founder, LevelUp",
+			"author": "Founder, Axl Gaming Store",
 			"role": "Multi-platform gaming e-commerce"
 		},
 		{

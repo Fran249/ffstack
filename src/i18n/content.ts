@@ -19,6 +19,7 @@ export interface Experience {
 	role: string;
 	stack: string;
 	points: string[];
+	url?: string;
 }
 
 export interface EducationItem {
@@ -89,6 +90,7 @@ const es: SiteContent = {
 			period: "2025 – Presente",
 			role: "Desarrollador Freelance",
 			stack: "Next.js · Shadcn · Tailwind · Firebase · Firestore · Cloud Functions · Storage · MercadoPago Checkout Pro · Split Payments · Tauri v2 · CI/CD",
+			url: "https://kic-market-backend--kic-market-4bca5.us-central1.hosted.app/",
 			points: [
 				"Desarrollé un marketplace de e-commerce con dos tipos de usuarios: compradores y vendedores, cada uno con su propio panel de gestión.",
 				"Cada vendedor cuenta con su propia página o storefront para gestionar sus productos y ventas.",
@@ -98,12 +100,13 @@ const es: SiteContent = {
 			],
 		},
 		{
-			company: "LevelUp",
+			company: "Axl Gaming Store",
 			description:
 				"E-commerce de gaming con la lógica de backend en Cloudflare Workers, un panel de administración para escritorio y Android, y despliegue totalmente automatizado.",
 			period: "2026 – Presente",
 			role: "Desarrollador Freelance",
 			stack: "Next.js · Supabase · Cloudflare Workers · Tauri v2 · CI/CD",
+			url: "https://levelup.franlopez9724.workers.dev/",
 			points: [
 				"Desarrollé un e-commerce de gaming con Next.js y Supabase, usando Cloudflare Workers para la lógica de backend.",
 				"Construí un panel de administración en Tauri v2 para escritorio y Android, que centraliza la gestión de la tienda en todas las plataformas.",
@@ -117,6 +120,7 @@ const es: SiteContent = {
 			period: "2024 – Presente",
 			role: "Desarrollador Freelance",
 			stack: "React · Firebase · MercadoPago Checkout Pro · Webhooks · Resend · Tauri v2 · CI/CD",
+			url: "https://lagom-916e2.web.app/",
 			points: [
 				"Desarrollé un e-commerce de artesanías enfocado en ventas unitarias, con checkout integrado, webhooks de pagos en tiempo real y correos transaccionales automatizados.",
 				"Construí un panel en Tauri v2 que centraliza la gestión de productos, pedidos y contenido en un solo lugar.",
@@ -129,6 +133,7 @@ const es: SiteContent = {
 			period: "2024 – Presente",
 			role: "Desarrollador Freelance",
 			stack: "React · Tailwind · Firebase · Firestore · Storage · Cloud Functions · MercadoPago",
+			url: "https://loto-f63cd.web.app/",
 			points: [
 				"Desarrollé un e-commerce de joyería de alta calidad para un estudio de tatuajes y piercings, en React y Tailwind.",
 				"Panel de administración para gestionar productos, pedidos y contenido del catálogo.",
@@ -143,6 +148,7 @@ const es: SiteContent = {
 			period: "2025 – Presente",
 			role: "Desarrollador Freelance",
 			stack: "Next.js · Firebase · Cloud Functions · GitHub Actions · CI/CD",
+			url: "https://rentivecapital.com/",
 			points: [
 				"Desarrollé una plataforma de inversión con aproximadamente 25 usuarios activos y lógica financiera centralizada en Cloud Functions.",
 				"Optimicé el rendimiento: subí el puntaje de Speed Insights del 50% al 80% y reduje el tiempo de carga un 40%.",
@@ -155,6 +161,7 @@ const es: SiteContent = {
 			period: "2020 – Presente",
 			role: "Desarrollador Freelance",
 			stack: "React · Firebase · Tauri v2 · GitHub Actions · CI/CD",
+			url: "https://cxp-resources.com/",
 			points: [
 				"Mantuve el sitio corporativo durante 5 años, con tres iteraciones menores y un rediseño visual completo.",
 				"Integré un panel en Tauri v2 al flujo de trabajo del cliente, permitiendo actualizar contenido sin asistencia técnica.",
@@ -167,6 +174,7 @@ const es: SiteContent = {
 			period: "2021 – Presente",
 			role: "Desarrollador Freelance",
 			stack: "React · Firebase · TypeScript · GitHub Actions · CI/CD",
+			url: "https://hugoprieto.com.ar/",
 			points: [
 				"Migré un sitio básico en WordPress a un sitio moderno en React de cuatro páginas, con navegación guiada.",
 				"Rediseñé el sitio por completo, estableciendo su identidad visual y su SEO técnico desde cero.",
@@ -225,6 +233,7 @@ const en: SiteContent = {
 			period: "2025 – Present",
 			role: "Freelance Developer",
 			stack: "Next.js · Shadcn · Tailwind · Firebase · Firestore · Cloud Functions · Storage · MercadoPago Checkout Pro · Split Payments · Tauri v2 · CI/CD",
+			url: "https://kic-market-backend--kic-market-4bca5.us-central1.hosted.app/",
 			points: [
 				"Developed an e-commerce marketplace with two user types: buyers and sellers, each with their own management panel.",
 				"Each seller has their own storefront page to manage products and sales.",
@@ -234,12 +243,13 @@ const en: SiteContent = {
 			],
 		},
 		{
-			company: "LevelUp",
+			company: "Axl Gaming Store",
 			description:
 				"Gaming e-commerce with backend logic on Cloudflare Workers, an admin dashboard for desktop and Android, and fully automated deployment.",
 			period: "2026 – Present",
 			role: "Freelance Developer",
 			stack: "Next.js · Supabase · Cloudflare Workers · Tauri v2 · CI/CD",
+			url: "https://levelup.franlopez9724.workers.dev/",
 			points: [
 				"Developed a gaming e-commerce platform using Next.js and Supabase, with Cloudflare Workers for backend logic.",
 				"Built a Tauri v2 admin dashboard for desktop and Android, enabling centralized store management across platforms.",
@@ -253,6 +263,7 @@ const en: SiteContent = {
 			period: "2024 – Present",
 			role: "Freelance Developer",
 			stack: "React · Firebase · MercadoPago Checkout Pro · Webhooks · Resend · Tauri v2 · CI/CD",
+			url: "https://lagom-916e2.web.app/",
 			points: [
 				"Developed a handcrafted e-commerce platform focused on individual sales, with integrated checkout, real-time payment webhooks, and automated transactional emails.",
 				"Built a Tauri v2 dashboard that centralizes product, order, and content management in one place.",
@@ -265,6 +276,7 @@ const en: SiteContent = {
 			period: "2024 – Present",
 			role: "Freelance Developer",
 			stack: "React · Tailwind · Firebase · Firestore · Storage · Cloud Functions · MercadoPago",
+			url: "https://loto-f63cd.web.app/",
 			points: [
 				"Built a high-quality jewelry e-commerce for a tattoo and piercing studio using React and Tailwind.",
 				"Admin dashboard to manage products, orders, and catalog content.",
@@ -279,6 +291,7 @@ const en: SiteContent = {
 			period: "2025 – Present",
 			role: "Freelance Developer",
 			stack: "Next.js · Firebase · Cloud Functions · GitHub Actions · CI/CD",
+			url: "https://rentivecapital.com/",
 			points: [
 				"Developed an investment platform with approximately 25 active users and centralized financial logic implemented in Cloud Functions.",
 				"Optimized performance, improving the Speed Insights score from 50% to 80% and reducing page load time by 40%.",
@@ -291,6 +304,7 @@ const en: SiteContent = {
 			period: "2020 – Present",
 			role: "Freelance Developer",
 			stack: "React · Firebase · Tauri v2 · GitHub Actions · CI/CD",
+			url: "https://cxp-resources.com/",
 			points: [
 				"Maintained a corporate website for 5 years, delivering three minor iterations and one complete visual redesign.",
 				"Integrated a Tauri v2 dashboard into the client's workflow, enabling content updates without technical assistance.",
@@ -303,6 +317,7 @@ const en: SiteContent = {
 			period: "2021 – Present",
 			role: "Freelance Developer",
 			stack: "React · Firebase · TypeScript · GitHub Actions · CI/CD",
+			url: "https://hugoprieto.com.ar/",
 			points: [
 				"Migrated a basic WordPress website into a modern four-page React site with guided navigation.",
 				"Completely redesigned the website, establishing its visual identity and technical SEO from the ground up.",
