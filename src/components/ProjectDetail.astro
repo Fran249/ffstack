@@ -1,6 +1,7 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import AboutCta from "./AboutCta.astro";
+import ExternalLinkButton from "./ExternalLinkButton.tsx";
 import ProjectCarousel from "./ProjectCarousel.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
@@ -68,14 +69,11 @@ const isProductionLink = (url?: string) =>
 								? t("experience.productionLabel")
 								: t("experience.demoLabel")}
 						</span>
-						<a
+						<ExternalLinkButton
 							href={experience.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="underline underline-offset-4 hover:text-accent transition-colors"
-						>
-							{experience.url}
-						</a>
+							label={experience.url}
+							client:load
+						/>
 					</div>
 				)}
 
